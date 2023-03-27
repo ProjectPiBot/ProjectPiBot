@@ -1,8 +1,7 @@
 # ProjectPiBot
 
 [프로젝트 설명]\
-간단한 마이크 입력을 받아
-tts로 재생해주는 프로그램
+-
 
 git push 시 [remote: fatal error in commit_refs] 에러 해결법 
 
