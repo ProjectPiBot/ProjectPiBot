@@ -3,7 +3,6 @@ from gtts import gTTS
 import playsound # 윈도우에서 사용 시 playsound 1.2.2버전으로 다운그레이드 필요 (pip install playsound==1.2.2)
 import os
 
-
 # text를 말로 speak 하는 함수
 def speak(text):
     if os.path.isfile("tts.mp3"):
@@ -11,7 +10,6 @@ def speak(text):
     tts = gTTS(text=text, lang='ko')
     tts.save("tts.mp3")
     playsound.playsound("tts.mp3")
-
 
 
 Recognizer = sr.Recognizer()                                            # recognizer 초기화
