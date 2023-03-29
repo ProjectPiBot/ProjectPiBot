@@ -1,6 +1,6 @@
 import openai
 
-openai.api_key = ("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")
+openai.api_key = ("엄")
 
 def response(text):
     response = openai.Completion.create(
