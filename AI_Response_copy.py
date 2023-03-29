@@ -11,13 +11,10 @@ class ChatApp:
     def chat(self, message):
         self.messages.append({"role": "user", "content": message})
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=self.messages
+            model = "gpt-3.5-turbo",
+            messages = self.messages,
+            max_tokens = 50
         )
         self.messages.append({"role": "assistant", "content": response["choices"][0]["message"].content})
-        return response["choices"][0]["message"]
-    
+        return response["choices"][0]["message"].content.strip()
 
-asfd = ChatApp()
-
-asfd.chat("안녕하세요")
