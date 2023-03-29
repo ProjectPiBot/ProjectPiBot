@@ -11,7 +11,6 @@ def speak(text):
     tts.save("tts.mp3")
     playsound.playsound("tts.mp3")
 
-
 Recognizer = sr.Recognizer()                                            # recognizer 초기화
 mic = sr.Microphone()                                                   # 마이크 설정
 
