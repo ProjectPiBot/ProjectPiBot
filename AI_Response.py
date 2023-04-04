@@ -1,24 +1,20 @@
 import openai
 
-openai.api_key = ("")
+class ChatApp:
+    def __init__(self):
+        # Setting the API key to use the OpenAI API
+        openai.api_key = ("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")
+        self.messages = [
+            {"role": "system", "content": "assistant"},
+        ]
 
-def response(text):
-    response = openai.Completion.create(
-                model = "text-davinci-003", 
-                prompt = text,
-                temperature = 0,
-                max_tokens = 100,
-                top_p = 1,
-                frequency_penalty = 0.0,
-                presence_penalty = 0.0,
-                stop=["#n"]
-    )
-    print(response.choices[0].text.strip())
-    return response.choices[0]
-    # #print(response)
+    def chat(self, message):
+        self.messages.append({"role": "user", "content": message})
+        response = openai.ChatCompletion.create(
+            model = "gpt-3.5-turbo",
+            messages = self.messages,
+            max_tokens = 50
+        )
+        self.messages.append({"role": "assistant", "content": response["choices"][0]["message"].content})
+        return response["choices"][0]["message"].content.strip()
 
-    # print(response.choices[0].text.strip())
-    # #print(str(response))
-    # TTS.speak(str(response.choices[0].text.strip()))
-
-print(response("안녕하세요"))
