@@ -3,7 +3,7 @@ import openai
 class ChatApp:
     def __init__(self):
         # Setting the API key to use the OpenAI API
-        openai.api_key = ("api key")
+        openai.api_key = ("")
         self.messages = [
             {"role": "system", "content": "assistant"},
         ]
