@@ -8,12 +8,16 @@ class ChatApp:
             {"role": "system", "content": "assistant"},
         ]
 
-    def chat(self, message):
+    def chat(self, message, context=None):
+        if context:
+            self.messages.append({"role": "assistant", "content": context})
+
         self.messages.append({"role": "user", "content": message})
+
         response = openai.ChatCompletion.create(
             model = "gpt-3.5-turbo",
             messages = self.messages,
-            max_tokens = 50
+            max_tokens = 50,
         )
         self.messages.append({"role": "assistant", "content": response["choices"][0]["message"].content})
         return response["choices"][0]["message"].content.strip()
