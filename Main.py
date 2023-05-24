@@ -17,6 +17,7 @@ chatbot = AR.ChatApp()
 now = datetime.now()                  
 dt = now.date()
 yd = now.date() + timedelta(days=1)
+# date = {"오늘" : dt.strftime("%Y년 %m월 %d일"), "내일" : yd.strftime("%Y년 %m월 %d일")}
 rend = dt.strftime("%Y년 %m월 %d일")
 reyd = yd.strftime("%Y년 %m월 %d일") 
 
@@ -42,20 +43,38 @@ while True:
                 if loc in data:
                     val = loc
             context = Open_Weather.get_weather(val)
-        r_text = str(chatbot.chat(data, context))
-        TTS.speak(r_text)                                               # 들은 말을 TTS로 재생
-        print("input data : ", data)
-        print("out data : ", r_text)
     
-        if "오늘" in data:
-            TTS.speak(rend)                                   # 오늘 날짜를 TTS로 재생
-            print("input data : ", data)
-            print("out data : ", rend)
+        if "일정" or "일쩡" in data:
+            TTS.speak("네, 일정을 추가 하시겠습니까?")
+            with mic as source:
+                audio = Recognizer.listen(source)                               # 마이크 듣기 시작
+                print("대답해!!!!!!!!!!!!")
+                try:
+                    data = Recognizer.recognize_google(audio ,language="ko-KR")     # STT중 무료, 한글 사용 가능
+                    print(data)
+                    if "네" in data:
+                        TTS.speak("어쩌라고")
+                except:
+                    TTS.speak("똑바로 말해 새끼야")
+                    continue
+            
+            # print("input data : ", data)
+            # print("out data : ", )
 
-        if "내일" in data:
-            TTS.speak(reyd)                                   # 내일 날짜를 TTS로 재생
-            print("input data : ", data)
-            print("out data : ", reyd)
+            # if "오늘" in data:
+            #     TTS.speak(rend)                                   # 오늘 날짜를 TTS로 재생
+            #     print("input data : ", data)
+            #     print("out data : ", rend)
+            # elif "내일" in data:
+            #     TTS.speak(reyd)                                   # 내일 날짜를 TTS로 재생
+            #     print("input data : ", data)
+            #     print("out data : ", reyd)
+            # else:
+            #     r_text = str(chatbot.chat(data, context))
+            #     TTS.speak(r_text)                                               # 들은 말을 TTS로 재생
+            #     print("input data : ", data)
+            #     print("out data : ", r_text)
+            
 
     except Exception as E:                                              # 오류 확인용 exception
         print("fail")
