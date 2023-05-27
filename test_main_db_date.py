@@ -23,8 +23,8 @@ con.commit
 now = datetime.now()                  
 dt = now.date()
 tm = now.date() + timedelta(days=1)
-toda = dt.strftime("%Y년 %m월 %d일")
-tmda = tm.strftime("%Y년 %m월 %d일")
+toda = dt.strftime("%Y년 %m월 %d일")                                    # 오늘 날짜를 문자열로 변경
+tmda = tm.strftime("%Y년 %m월 %d일")                                    # 내일 날짜를 문자열로 변경
 
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
 commands = ["일정", "날씨"]                                             # api를 호출해야하는 명령 목록
@@ -63,9 +63,9 @@ while True:
     if data == "일정":                                     # "일정"이 입력 되면 실행
         TTS.speak("네 일정을 말해주세요.")
         if data:
-            TTS.speak("일정을 오늘 내일 어느날에 기록 할까요?")
             content = data                                 # 입력된 내용을 content에 저장
             print("입력된 내용 : ", content)
+            TTS.speak("일정을 오늘 내일 어느날에 기록 할까요?")
             if "오늘" in data:
                 TTS.speak(toda)                                   # 오늘 날짜를 TTS로 재생
                 date = data                                       # 오늘 날짜를 date에 저장
@@ -74,17 +74,17 @@ while True:
                 TTS.speak(tmda)                                   # 내일 날짜를 TTS로 재생
                 date = tmda                                       # 내일 날짜를 date에 저장
                 print("입력된 내용 : ", date)
-            
+    
 
 
 
 
 
-        r_text = str(chatbot.chat(data, context))
-        TTS.speak(r_text)                                   # 들은 말을 TTS로 재생
+        # r_text = str(chatbot.chat(data, context))
+        # TTS.speak(r_text)                                   # 들은 말을 TTS로 재생
         
-        print("input data : ", data)
-        print("out data : ", r_text)
+        # print("input data : ", data)
+        # print("out data : ", r_text)
 
     else:                                                     # 그만 또는 멈춰라고 말할 시 프로그램 종료
         TTS.speak("프로그램을 종료합니다.")
