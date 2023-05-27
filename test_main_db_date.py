@@ -67,11 +67,11 @@ while True:
             print("입력된 내용 : ", content)
             TTS.speak("일정을 오늘 내일 어느날에 기록 할까요?")
             date_data = stt()
-            if "오늘" in data:
+            if "오늘" in date_data:
                 TTS.speak(toda)                                   # 오늘 날짜를 TTS로 재생
                 date = toda                                       # 오늘 날짜를 date에 저장
                 print("입력된 내용 : ", date)
-            elif "내일" in data:
+            elif "내일" in date_data:
                 TTS.speak(tmda)                                   # 내일 날짜를 TTS로 재생
                 date = tmda                                       # 내일 날짜를 date에 저장
                 print("입력된 내용 : ", date)
