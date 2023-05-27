@@ -4,20 +4,20 @@ import AI_Response as AR
 import Open_Weather
 from datetime import datetime
 from datetime import timedelta
-import pymssql
+# import pymssql
 
-# db연결
-con = pymssql.connect(
-    host = 'localhost',
-    user = 'root',
-    password = 'pasword',
-    database = 'dbname'
-)
-cur = con.cursor()
+# # db연결
+# con = pymssql.connect(
+#     host = 'localhost',
+#     user = 'root',
+#     password = 'pasword',
+#     database = 'dbname'
+# )
+# cur = con.cursor()
 
-sql = "INSERT INTO table (date, content) VALUES (date, content)"
-cur.excute(sql)
-con.commit
+# sql = "INSERT INTO table (date, content) VALUES (date, content)"
+# cur.excute(sql)
+# con.commit
 
 # 날짜 설정
 now = datetime.now()                  
