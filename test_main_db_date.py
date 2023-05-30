@@ -75,7 +75,12 @@ while True:
                 TTS.speak(tmda)                                   # 내일 날짜를 TTS로 재생
                 date = tmda                                       # 내일 날짜를 date에 저장
                 print("입력된 내용 : ", date)
-    
+        con = pymysql.connect(host='localhost', user='root', password='', db='pdb', charset='utf8') 
+        cur = con.cursor()                                                                          
+        sql = "insert into schedule values ('" + date + "','" + content + "')"                      
+        cur.execute(sql)
+        con.commit()
+        con.close()
 
 
 
