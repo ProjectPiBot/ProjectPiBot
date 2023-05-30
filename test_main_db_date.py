@@ -4,7 +4,7 @@ import AI_Response as AR
 import Open_Weather
 from datetime import datetime
 from datetime import timedelta
-# import pymssql
+import pymysql
 
 # # db연결
 # con = pymssql.connect(
