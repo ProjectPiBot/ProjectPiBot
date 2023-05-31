@@ -14,12 +14,14 @@ dat = now.date() + timedelta(days=2)
 today = dt.strftime("%Y년 %m월 %d일")                                    # 오늘 날짜를 문자열로 변경
 tomorrow = tm.strftime("%Y년 %m월 %d일")                                    # 내일 날짜를 문자열로 변경
 day_after_tomorrow = dat.strftime("%Y년 %m월 %d일")                             #모레 날짜를 문자열로 변경
+# 특정 날짜 출력
+select_day = ("%Y년 %m월 %d일")
 
 
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
 commands = ["일정", "날씨"]                                             # api를 호출해야하는 명령 목록
 
-similar = ["하이본", "파이봇"]
+similar = ["하이본", "파이봇", "사이봇", "타이머"]
 
 # 음성을 듣고 텍스트로 변환하는 함수
 def stt() -> str:
@@ -91,8 +93,14 @@ while True:
                         TTS.speak(day_after_tomorrow)                                   # 모레 날짜를 TTS로 재생
                         date = day_after_tomorrow                                       # 모레 날짜를 date에 저장
                         print("입력된 내용 : ", date)
+                    
+                    elif "%Y년 %m월 %d일" in date_data:
+                        TTS.speak(select_day)
+                        date = select_day
+                        print("내용", date)
                 
-                    sql_insert(date, content_data)
+                    # sql_insert(date, content_data)
+                    #db실행할때 이거 주석문 꼭 지우셈 무조건 지우셈
 
             if command == "날씨":
                 if "날씨" in data:
