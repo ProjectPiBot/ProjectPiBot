@@ -37,7 +37,7 @@ def stt() -> str:
 def sql_insert(date, content):
     con = pymysql.connect(host='localhost', user='root', password='1234', db='pdb', charset='utf8') 
     cur = con.cursor()                                                                          
-    sql = "insert into schedule values ('" + date_data + "','" + content_data + "')"
+    sql = "insert into schedule values ('" + date + "','" + content_data + "')"
     cur.execute(sql)
     con.commit()
     con.close()
