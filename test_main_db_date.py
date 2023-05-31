@@ -16,7 +16,7 @@ tomorrow = tm.strftime("%Y년 %m월 %d일")                                    #
 day_after_tomorrow = dat.strftime("%Y년 %m월 %d일")                             #모레 날짜를 문자열로 변경
 
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
-commands = ["일정", "날씨" "체크"]                                             # api를 호출해야하는 명령 목록
+commands = ["일정", "날씨" "확인"]                                             # api를 호출해야하는 명령 목록
 
 similar = ["하이본", "파이봇", "사이봇", "타이머"]
 
@@ -35,9 +35,9 @@ def stt() -> str:
     return data
 
 def sql_insert(date, content):
-    con = pymysql.connect(host='localhost', user='root', password='', db='pdb', charset='utf8') 
+    con = pymysql.connect(host='localhost', user='root', password='1234', db='pdb', charset='utf8') 
     cur = con.cursor()                                                                          
-    sql = "insert into schedule values ('" + date + "','" + content + "')"
+    sql = "insert into schedule values ('" + date_data + "','" + content_data + "')"
     cur.execute(sql)
     con.commit()
     con.close()
@@ -68,9 +68,21 @@ while True:
             if command == "확인":
                 TTS.speak("언제 일정을 확인 할까요?.")
 
-                if "오늘":
+                if "오늘" in date_data:
+                    TTS.speak("오늘 일정을 확인합니다.")
                     date = today
-                    
+                    con = pymysql.connect(host='localhost', user='root', password='1234',
+                                        db='pdb', charset='utf8')
+                    cur = con.cursor()
+                    sql = "select * from schedule where date='" + date +"'"
+                    cur.execute(sql)
+
+                    # 데이타 Fetch
+                    rows = cur.fetchall()
+                    print(rows)
+                    con.close()
+
+                    TTS.speak(rows)
                     
 
             if command == "일정":                                # "일정"이 입력 되면 실행
@@ -103,8 +115,7 @@ while True:
                         print("입력된 내용", date_data)
                         
 
-                    # sql_insert(date, content_data)
-                    #db실행할때 이거 주석문 꼭 지우셈 무조건 지우셈
+                    sql_insert(date, content_data)
 
             if command == "날씨":
                 if "날씨" in data:
