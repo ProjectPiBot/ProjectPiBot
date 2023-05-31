@@ -17,6 +17,8 @@ location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '�
 commands = ["일정", "날씨"]                                             # api를 호출해야하는 명령 목록
 schedule = ["오늘", "내일"]
 
+similar = ["하이본", "파이봇"]
+
 # 음성을 듣고 텍스트로 변환하는 함수
 def stt() -> str:
     data = ""
@@ -52,6 +54,11 @@ while True:
     if not("멈춰" in data or "그만" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
         command = ""
 
+        for check in similar:
+            if check in data:
+                TTS.speak("왜불러")
+                break
+
         for current in commands:                            # 특정 명령 단어가
             if current in data:                             # 말에 있는지 확인
                 command = current                           # 특정 명령이 말에 들어가 있을 경우 해당 명령을 command 변수에 저장
@@ -70,7 +77,7 @@ while True:
 
                     if "오늘" in date_data:
                         TTS.speak(toda)                                   # 오늘 날짜를 TTS로 재생
-                        date = toda                                       # 오늘 날짜를 date에 저장https://github.com/ProjectPiBot/ProjectPiBot/blob/main/test_main.py
+                        date = toda                                       # 오늘 날짜를 date에 저장
                         print("입력된 내용 : ", date)
 
                     elif "내일" in date_data:
@@ -88,6 +95,8 @@ while True:
                             val = loc
                     
                     context = Open_Weather.get_weather(val)
+                    r_text = str(chatbot.chat(data, context))
+                    TTS.speak(r_text)
         
         else:       # 명령 입력이 없이 일반 대화일 시                         
             r_text = str(chatbot.chat(data, context))
