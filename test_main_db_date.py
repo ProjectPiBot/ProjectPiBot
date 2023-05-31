@@ -16,7 +16,7 @@ tomorrow = tm.strftime("%Y년 %m월 %d일")                                    #
 day_after_tomorrow = dat.strftime("%Y년 %m월 %d일")                             #모레 날짜를 문자열로 변경
 
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
-commands = ["일정", "날씨"]                                             # api를 호출해야하는 명령 목록
+commands = ["일정", "날씨" "체크"]                                             # api를 호출해야하는 명령 목록
 
 similar = ["하이본", "파이봇", "사이봇", "타이머"]
 
@@ -65,7 +65,15 @@ while True:
                 command = current                           # 특정 명령이 말에 들어가 있을 경우 해당 명령을 command 변수에 저장
 
         if command != "":
-            if command == "일정":                                     # "일정"이 입력 되면 실행
+            if command == "확인":
+                TTS.speak("언제 일정을 확인 할까요?.")
+
+                if "오늘":
+                    date = today
+                    
+                    
+
+            if command == "일정":                                # "일정"이 입력 되면 실행
                 data = ""
                 TTS.speak("네 일정을 말해주세요.")
                 content_data = stt()                             # 할일 저장
@@ -93,7 +101,8 @@ while True:
                     else:
                         TTS.speak(date_data)
                         print("입력된 내용", date_data)
-                
+                        
+
                     # sql_insert(date, content_data)
                     #db실행할때 이거 주석문 꼭 지우셈 무조건 지우셈
 
