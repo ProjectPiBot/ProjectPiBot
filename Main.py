@@ -2,9 +2,10 @@ import speech_recognition as sr
 import TTS
 import AI_Response as AR
 import Open_Weather
+import pymysql
 from datetime import datetime
 from datetime import timedelta
-import pymysql
+
 
 # 날짜 설정
 now = datetime.now()                  
