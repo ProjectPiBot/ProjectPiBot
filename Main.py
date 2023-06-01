@@ -3,21 +3,10 @@ import TTS
 import AI_Response as AR
 import Open_Weather
 import pymysql
-from datetime import datetime
-from datetime import timedelta
-
-
-# 날짜 설정
-now = datetime.now()                  
-dt = now.date()                                                         # 오늘
-tm = now.date() + timedelta(days=1)                                     # 내일
-dat = now.date() + timedelta(days=2)                                    # 모래
-today = dt.strftime("%Y년 %m월 %d일")                                    # 오늘 날짜를 문자열로 변경
-tomorrow = tm.strftime("%Y년 %m월 %d일")                                 # 내일 날짜를 문자열로 변경
-day_after_tomorrow = dat.strftime("%Y년 %m월 %d일")                      #모레 날짜를 문자열로 변경
+import Pi_Date as date
 
 commands = ["일정", "날씨", "확인"]                                             # api를 호출해야하는 명령 목록
-similar = ["하이본", "파이봇", "사이봇", "타이머"]
+similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드"]
 
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
 
@@ -72,8 +61,8 @@ while True:
 
         for check in similar:                               # 파이봇과 비슷한 단어를 확인
             if check in data:
-                data = stt()
                 TTS.speak("왜요")
+                data = stt()
                 break
 
         for current in commands:                            # 특정 명령 단어가
@@ -89,15 +78,15 @@ while True:
 
                 if "오늘" in data:
                     TTS.speak("오늘 일정을 확인합니다.")
-                    date = today
+                    date = date.today
                     
                 if "내일" in data:
                     TTS.speak("내일 일정을 확인합니다.")
-                    date = tomorrow
+                    date = date.tomorrow
                 
                 if "모레" in data:
                     TTS.speak("모레 일정을 확인합니다.")
-                    date = day_after_tomorrow
+                    date = date.day_after_tomorrow
 
                 rows = sql_select(date)
                 TTS.speak(rows)
@@ -113,18 +102,18 @@ while True:
                     date_data = stt()
 
                     if "오늘" in date_data:
-                        TTS.speak(today)                         # 오늘 날짜를 TTS로 재생
-                        date = today                             # 오늘 날짜를 date에 저장
+                        TTS.speak(date.today)                         # 오늘 날짜를 TTS로 재생
+                        date = date.today                             # 오늘 날짜를 date에 저장
                         print("입력된 내용 : ", date)
 
                     elif "내일" in date_data:
-                        TTS.speak(tomorrow)                      # 내일 날짜를 TTS로 재생
-                        date = tomorrow                          # 내일 날짜를 date에 저장
+                        TTS.speak(date.tomorrow)                      # 내일 날짜를 TTS로 재생
+                        date = date.tomorrow                          # 내일 날짜를 date에 저장
                         print("입력된 내용 : ", date)
                     
                     elif "모레" in date_data:
-                        TTS.speak(day_after_tomorrow)            # 모레 날짜를 TTS로 재생
-                        date = day_after_tomorrow                # 모레 날짜를 date에 저장
+                        TTS.speak(date.day_after_tomorrow)            # 모레 날짜를 TTS로 재생
+                        date = date.day_after_tomorrow                # 모레 날짜를 date에 저장
                         print("입력된 내용 : ", date)
                     
                     else:
