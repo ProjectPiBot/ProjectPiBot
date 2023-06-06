@@ -68,11 +68,11 @@ class SoundController:
 
 if __name__ == "__main__":
     soundCtrl = SoundController()
-    soundCtrl.playMp3("./sounds/pass.mp3")
+    #soundCtrl.playMp3("./sounds/pass.mp3")
     soundCtrl.ttsKR("통과입니다.")
-    soundCtrl.playMp3_speed("./sounds/pass.mp3", 1.25)
+    #soundCtrl.playMp3_speed("./sounds/pass.mp3", 1.25)
     soundCtrl.ttsKR_speed("통과입니다!", 1.25)
-    soundCtrl.playMp3_speed("./sounds/failed.mp3", 1.25)
+    #soundCtrl.playMp3_speed("./sounds/failed.mp3", 1.25)
     soundCtrl.ttsKR_speed("마스크를 써주세요!", 1.25)
-    soundCtrl.playMp3_speed("./sounds/failed.mp3", 1.25)
+    #soundCtrl.playMp3_speed("./sounds/failed.mp3", 1.25)
     soundCtrl.ttsKR_speed("발열감지! 다시 측정해주세요", 1.5)
