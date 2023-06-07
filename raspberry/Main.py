@@ -1,5 +1,5 @@
 import speech_recognition as sr
-import TTS
+import Rasp_TTS as rt
 import AI_Response as AR
 import Open_Weather
 import pymysql
@@ -52,6 +52,7 @@ def sql_select(date):
 Recognizer = sr.Recognizer()                                            # recognizer 초기화
 mic = sr.Microphone()                                                   # 마이크 설정
 chatbot = AR.ChatApp()                                                  # 챗봇 연결
+soundCtrl = rt.SoundController()
 
 while True:
     data = stt()                                            # 음성을 텍스트로 변환함
@@ -63,7 +64,7 @@ while True:
 
         for check in similar:                               # 파이봇과 비슷한 단어를 확인
             if check in data:
-                TTS.speak("왜요")
+                soundCtrl.ttsKR("왜요")
                 data = stt()
                 break
 
@@ -74,48 +75,48 @@ while True:
 
         if command != "":                                   # 특정 명령이 들어왔을 경우 명령에 맞는 명령 실행
             if command == "확인":
-                TTS.speak("언제 일정을 확인 할까요?.")
+                soundCtrl.ttsKR("언제 일정을 확인 할까요?.")
                 data = stt()
                 date = ""
 
                 if "오늘" in data:
-                    TTS.speak("오늘 일정을 확인합니다.")
+                    soundCtrl.ttsKR("오늘 일정을 확인합니다.")
                     date = date.today
                     
                 if "내일" in data:
-                    TTS.speak("내일 일정을 확인합니다.")
+                    soundCtrl.ttsKR("내일 일정을 확인합니다.")
                     date = date.tomorrow
                 
                 if "모레" in data:
-                    TTS.speak("모레 일정을 확인합니다.")
+                    soundCtrl.ttsKR("모레 일정을 확인합니다.")
                     date = date.day_after_tomorrow
 
                 rows = sql_select(date)
-                TTS.speak(rows)
+                soundCtrl.ttsKR(rows)
 
             if command == "일정":                                # "일정"이 입력 되면 실행
                 data = ""
-                TTS.speak("네 일정을 말해주세요.")
+                soundCtrl.ttsKR("네 일정을 말해주세요.")
                 content_data = stt()                             # 할일 저장
                 
                 if content_data != "취소":
-                    TTS.speak("일정을 어느날에 기록 할까요?")
+                    soundCtrl.ttsKR("일정을 어느날에 기록 할까요?")
                     date_data = stt()
 
                     if "오늘" in date_data:
-                        TTS.speak(date.today)                         # 오늘 날짜를 TTS로 재생
+                        soundCtrl.ttsKR(date.today)                         # 오늘 날짜를 TTS로 재생
                         date = date.today                             # 오늘 날짜를 date에 저장
 
                     elif "내일" in date_data:
-                        TTS.speak(date.tomorrow)                      # 내일 날짜를 TTS로 재생
+                        soundCtrl.ttsKR(date.tomorrow)                      # 내일 날짜를 TTS로 재생
                         date = date.tomorrow                          # 내일 날짜를 date에 저장
                     
                     elif "모레" in date_data:
-                        TTS.speak(date.day_after_tomorrow)            # 모레 날짜를 TTS로 재생
+                        soundCtrl.ttsKR(date.day_after_tomorrow)            # 모레 날짜를 TTS로 재생
                         date = date.day_after_tomorrow                # 모레 날짜를 date에 저장
                     
                     else:
-                        TTS.speak(date_data)
+                        soundCtrl.ttsKR(date_data)
                         
                     sql_insert(date, content_data)               # 일정 입력
 
@@ -128,14 +129,14 @@ while True:
                     
                     context = Open_Weather.get_weather(val)
                     r_text = str(chatbot.chat(data, context))
-                    TTS.speak(r_text)
+                    soundCtrl.ttsKR(r_text)
         
         # 명령 입력이 없이 일반 대화일 시
         else:
             r_text = str(chatbot.chat(data, context))
-            TTS.speak(r_text)
+            soundCtrl.ttsKR(r_text)
 
     # 그만 또는 멈춰라고 말할 시 프로그램 종료
     else:                                                     
-        TTS.speak("프로그램을 종료합니다.")
+        soundCtrl.ttsKR("프로그램을 종료합니다.")
         break
