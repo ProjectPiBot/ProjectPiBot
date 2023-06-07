@@ -5,7 +5,7 @@ import Open_Weather
 import pymysql
 import Pi_Date as cdate
 
-commands = ["일정", "날씨", "확인"]                                             # api를 호출해야하는 명령 목록
+commands = ["일정", "날씨", "확인", "추가"]                                             # api를 호출해야하는 명령 목록
 similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드"]
 date_index = ["오늘", "내일", "모레"]
 
@@ -54,12 +54,13 @@ mic = sr.Microphone()                                                   # 마이
 chatbot = AR.ChatApp()                                                  # 챗봇 연결
 
 while True:
+    print("start!")
     data = stt()                                            # 음성을 텍스트로 변환함
     context = ""                                            # 챗봇에 전달할 정보
     print(data)
 
     if not("멈춰" in data or "그만" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
-        command = ""
+        command = []
 
         for check in similar:                               # 파이봇과 비슷한 단어를 확인
             if check in data:
@@ -69,60 +70,66 @@ while True:
 
         for current in commands:                            # 특정 명령 단어가
             if current in data:                             # 말에 있는지 확인
-                command = current                           # 특정 명령이 말에 들어가 있을 경우 해당 명령을 command 변수에 저장
+                command.append(current)                           # 특정 명령이 말에 들어가 있을 경우 해당 명령을 command 변수에 저장
                 print("command? : ", command)
 
         if command != "":                                   # 특정 명령이 들어왔을 경우 명령에 맞는 명령 실행
-            if command == "확인":
-                TTS.speak("언제 일정을 확인 할까요?.")
-                data = stt()
-                date = ""
+            if "일정" in command:                                # "일정"이 입력 되면 실행
+                if "확인" in command:
+                    TTS.speak("언제 일정을 확인 할까요?.")
+                    data = stt()
+                    date = ""
 
-                if "오늘" in data:
-                    TTS.speak("오늘 일정을 확인합니다.")
-                    date = cdate.today
+                    if "오늘" in data:
+                        TTS.speak("오늘 일정을 확인합니다.")
+                        date = cdate.today
+                        
+                    if "내일" in data:
+                        TTS.speak("내일 일정을 확인합니다.")
+                        date = cdate.tomorrow
                     
-                if "내일" in data:
-                    TTS.speak("내일 일정을 확인합니다.")
-                    date = cdate.tomorrow
-                
-                if "모레" in data:
-                    TTS.speak("모레 일정을 확인합니다.")
-                    date = cdate.day_after_tomorrow
+                    if "모레" in data:
+                        TTS.speak("모레 일정을 확인합니다.")
+                        date = cdate.day_after_tomorrow
 
-                else:
-                    date = data
+                    else:
+                        date = data
 
-                rows = sql_select(date)
-                TTS.speak(str(rows))
+                    rows = sql_select(date)
+                    TTS.speak(str(rows))
+                    print(str(rows))
+                    print(date)
 
-            if command == "일정":                                # "일정"이 입력 되면 실행
-                data = ""
-                TTS.speak("네 일정을 말해주세요.")
-                content_data = stt()                             # 할일 저장
-                
-                if content_data != "취소":
+                if "추가" in command:
+                    data = ""
+                    TTS.speak("네 일정을 말해주세요.")
+                    content_data = stt()                             # 할일 저장
+                    print(content_data)
+
                     TTS.speak("일정을 어느날에 기록 할까요?")
                     date_data = stt()
+                    print(date_data)
 
                     if "오늘" in date_data:
-                        TTS.speak(date.today)                         # 오늘 날짜를 TTS로 재생
-                        date = date.today                             # 오늘 날짜를 date에 저장
+                        TTS.speak(cdate.today)                         # 오늘 날짜를 TTS로 재생
+                        date = cdate.today                             # 오늘 날짜를 date에 저장
 
                     elif "내일" in date_data:
-                        TTS.speak(date.tomorrow)                      # 내일 날짜를 TTS로 재생
-                        date = date.tomorrow                          # 내일 날짜를 date에 저장
+                        TTS.speak(cdate.tomorrow)                      # 내일 날짜를 TTS로 재생
+                        date = cdate.tomorrow                          # 내일 날짜를 date에 저장
                     
                     elif "모레" in date_data:
-                        TTS.speak(date.day_after_tomorrow)            # 모레 날짜를 TTS로 재생
-                        date = date.day_after_tomorrow                # 모레 날짜를 date에 저장
+                        TTS.speak(cdate.day_after_tomorrow)            # 모레 날짜를 TTS로 재생
+                        date = cdate.day_after_tomorrow                # 모레 날짜를 date에 저장
                     
                     else:
                         date = date_data
                         TTS.speak(date)
+                        print(date)
                         
                         
                     sql_insert(date, content_data)               # 일정 입력
+                    print(content_data)
 
             if command == "날씨":
                 if "날씨" in data:
