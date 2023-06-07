@@ -3,7 +3,7 @@ import TTS
 import AI_Response as AR
 import Open_Weather
 import pymysql
-import Pi_Date as date
+import Pi_Date as cdate
 
 commands = ["일정", "날씨", "확인"]                                             # api를 호출해야하는 명령 목록
 similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드"]
@@ -80,18 +80,21 @@ while True:
 
                 if "오늘" in data:
                     TTS.speak("오늘 일정을 확인합니다.")
-                    date = date.today
+                    date = cdate.today
                     
                 if "내일" in data:
                     TTS.speak("내일 일정을 확인합니다.")
-                    date = date.tomorrow
+                    date = cdate.tomorrow
                 
                 if "모레" in data:
                     TTS.speak("모레 일정을 확인합니다.")
-                    date = date.day_after_tomorrow
+                    date = cdate.day_after_tomorrow
+
+                else:
+                    date = data
 
                 rows = sql_select(date)
-                TTS.speak(rows)
+                TTS.speak(str(rows))
 
             if command == "일정":                                # "일정"이 입력 되면 실행
                 data = ""
@@ -115,9 +118,9 @@ while True:
                         date = date.day_after_tomorrow                # 모레 날짜를 date에 저장
                     
                     else:
-                        TTS.speak(date_data)
                         date = date_data
-                        print("입력된 내용: ", date)
+                        TTS.speak(date)
+                        
                         
                     sql_insert(date, content_data)               # 일정 입력
 
