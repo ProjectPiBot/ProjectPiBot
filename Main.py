@@ -116,6 +116,8 @@ while True:
                     
                     else:
                         TTS.speak(date_data)
+                        date = date_data
+                        print("입력된 내용: ", date)
                         
                     sql_insert(date, content_data)               # 일정 입력
 
