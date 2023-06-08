@@ -57,7 +57,6 @@ while True:
     print("start!")
     data = stt()                                            # 음성을 텍스트로 변환함
     context = ""                                            # 챗봇에 전달할 정보
-    print(data)
 
     if not("멈춰" in data or "그만" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
         command = []
@@ -97,39 +96,36 @@ while True:
 
                     rows = sql_select(date)
                     TTS.speak(str(rows))
-                    print(str(rows))
-                    print(date)
 
                 if "추가" in command:
                     data = ""
                     TTS.speak("네 일정을 말해주세요.")
                     content_data = stt()                             # 할일 저장
-                    print(content_data)
 
                     TTS.speak("일정을 어느날에 기록 할까요?")
                     date_data = stt()
-                    print(date_data)
 
                     if "오늘" in date_data:
                         TTS.speak(cdate.today)                         # 오늘 날짜를 TTS로 재생
-                        date = cdate.today                             # 오늘 날짜를 date에 저장
+                        toda = cdate.tomorrow.replace(" 0"," ")
+                        date = toda                             # 오늘 날짜를 date에 저장
 
                     elif "내일" in date_data:
                         TTS.speak(cdate.tomorrow)                      # 내일 날짜를 TTS로 재생
-                        date = cdate.tomorrow                          # 내일 날짜를 date에 저장
+                        tomo = cdate.tomorrow.replace(" 0"," ")
+                        date = tomo                          # 내일 날짜를 date에 저장
                     
                     elif "모레" in date_data:
                         TTS.speak(cdate.day_after_tomorrow)            # 모레 날짜를 TTS로 재생
-                        date = cdate.day_after_tomorrow                # 모레 날짜를 date에 저장
+                        daft = cdate.tomorrow.replace(" 0"," ")
+                        date = daft                # 모레 날짜를 date에 저장
                     
                     else:
                         date = date_data
                         TTS.speak(date)
-                        print(date)
                         
                         
                     sql_insert(date, content_data)               # 일정 입력
-                    print(content_data)
 
             if command == "날씨":
                 if "날씨" in data:
