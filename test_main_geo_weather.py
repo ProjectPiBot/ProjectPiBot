@@ -13,6 +13,19 @@ def sql_insert(content):
     cur.execute(sql)
     con.commit()
     con.close()
+
+
+def sql_select():
+    con = pymysql.connect(host='localhost', user='root', password='1111', db='pdb', charset='utf8')
+    cur = con.cursor()
+    sql = "select * from weather"
+    cur.execute(sql)
+    
+    # 데이타 Fetch
+    rows = cur.fetchall()
+    print(rows)
+    con.close()
+    return str(rows)
     
 
 Recognizer = sr.Recognizer()                                            # recognizer 초기화
@@ -39,6 +52,13 @@ while True:
             print("out data : ", context)
             
             sql_insert(context)
+        
+        elif "날씨 다시 말해 줘" in data:
+            context = sql_select()
+            TTS.speak(context)
+            print("input data : ", data)
+            print("out data : ", context)
+    
             
         else:
             r_text = str(chatbot.chat(data, context))
@@ -50,3 +70,4 @@ while True:
     except Exception as E:                                               # 오류 확인용 exception
         print("fail")
         print(E)
+
