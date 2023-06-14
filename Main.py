@@ -129,8 +129,14 @@ while True:
                         
                     sql_insert(date, content_data)               # 일정 입력
 
-            if command == "날씨":
-                if "날씨" in data:
+            if "날씨" in command:
+                if "현재 위치" in command:
+                    context = cw.get_current_weather()    
+                    TTS.speak(context)
+                    print("input data : ", data)
+                    print("out data : ", context)
+
+                else:
                     val = ""
                     for loc in location_city:
                         if loc in data:
@@ -139,14 +145,7 @@ while True:
                     context = Open_Weather.get_weather(val)
                     r_text = str(chatbot.chat(data, context))
                     TTS.speak(r_text)
-        
-            if command == "현재 위치":
-                if "날씨" in data:
-                    context = cw.get_current_weather()    
-                    TTS.speak(context)
-                    print("input data : ", data)
-                    print("out data : ", context)
-                    
+                        
         
         # 명령 입력이 없이 일반 대화일 시
         else:
