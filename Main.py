@@ -31,7 +31,7 @@ def stt() -> str:
 def sql_insert(date, content):
     con = pymysql.connect(host='localhost', user='root', password='1234', db='pdb', charset='utf8') 
     cur = con.cursor()                                                                          
-    sql = "insert into schedule values ('" + date + "','" + content_data + "')"
+    sql = "insert into schedule values ('" + date + "','" + content + "')"
     cur.execute(sql)
     con.commit()
     con.close()
@@ -57,23 +57,24 @@ chatbot = AR.ChatApp()                                                  # 챗봇
 while True:
     print("start!")
     data = stt()                                            # 음성을 텍스트로 변환함
+    print(data)
     context = ""                                            # 챗봇에 전달할 정보
 
     if not("멈춰" in data or "그만" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
         command = []
 
-        for check in similar:                               # 파이봇과 비슷한 단어를 확인
-            if check in data:
-                TTS.speak("왜요")
-                data = stt()
-                break
+        # for check in similar:                               # 파이봇과 비슷한 단어를 확인
+        #     if check in data:
+        #         TTS.speak("왜요")
+        #         data = stt()
+        #         break
 
         for current in commands:                            # 특정 명령 단어가
             if current in data:                             # 말에 있는지 확인
                 command.append(current)                           # 특정 명령이 말에 들어가 있을 경우 해당 명령을 command 변수에 저장
                 print("command? : ", command)
 
-        if command != "":                                   # 특정 명령이 들어왔을 경우 명령에 맞는 명령 실행
+        if len(command) != 0:                                   # 특정 명령이 들어왔을 경우 명령에 맞는 명령 실행
             if "일정" in command:                                # "일정"이 입력 되면 실행
                 if "확인" in command:
                     TTS.speak("언제 일정을 확인 할까요?.")
