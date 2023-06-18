@@ -111,17 +111,17 @@ while True:
                         date_data = stt()
 
                         if "오늘" in date_data:
-                            soundCtrl.ttsKR(cdate.today, "에", content_data, " 일정을 기록했습니다.")                         # 오늘 날짜를 TTS로 재생
+                            soundCtrl.ttsKR((cdate.today, "에", content_data, " 일정을 기록했습니다."))                         # 오늘 날짜를 TTS로 재생
                             toda = cdate.tomorrow
                             date = toda                             # 오늘 날짜를 date에 저장
 
                         elif "내일" in date_data:
-                            soundCtrl.ttsKR(cdate.tomorrow, "에", content_data, " 일정을 기록했습니다.")                      # 내일 날짜를 TTS로 재생
+                            soundCtrl.ttsKR((cdate.tomorrow, "에", content_data, " 일정을 기록했습니다."))                      # 내일 날짜를 TTS로 재생
                             tomo = cdate.tomorrow
                             date = tomo                          # 내일 날짜를 date에 저장
                         
                         elif "모레" in date_data:
-                            soundCtrl.ttsKR(cdate.day_after_tomorrow, "에", content_data, " 일정을 기록했습니다.")            # 모레 날짜를 TTS로 재생
+                            soundCtrl.ttsKR((cdate.day_after_tomorrow, "에", content_data, " 일정을 기록했습니다."))            # 모레 날짜를 TTS로 재생
                             daft = cdate.tomorrow
                             date = daft                # 모레 날짜를 date에 저장
                         
