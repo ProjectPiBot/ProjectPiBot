@@ -87,11 +87,11 @@ while True:
                             soundCtrl.ttsKR("오늘 일정을 확인합니다.")
                             date = cdate.today
                             
-                        if "내일" in data:
+                        elif "내일" in data:
                             soundCtrl.ttsKR("내일 일정을 확인합니다.")
                             date = cdate.tomorrow
                         
-                        if "모레" in data:
+                        elif "모레" in data:
                             soundCtrl.ttsKR("모레 일정을 확인합니다.")
                             date = cdate.day_after_tomorrow
 
