@@ -3,7 +3,7 @@ import json
 import translate
 import geo2
 
-APIKEY = "2fed883ca7370c1a6f343cf63f0e25e3" # openweather API KEY
+APIKEY = "" # openweather API KEY
 
 def get_weather(c : str):
     city = translate.trans(c)                           # 도시
