@@ -1,7 +1,7 @@
 import requests
 import json
 
-GOOGLE_API_KEY = "AIzaSyBmEP0fov0tk_ONTrHhl9Z8ZUZQukug5fc"
+GOOGLE_API_KEY = ""
 
 def get_geo():
 
