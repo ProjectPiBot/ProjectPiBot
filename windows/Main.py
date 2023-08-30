@@ -1,10 +1,10 @@
 import speech_recognition as sr
+import current_weather as cw
 import TTS
 import AI_Response as AR
 import Open_Weather
 import pymysql
 import Pi_Date as cdate
-import current_weather as cw
 
 commands = ["일정", "날씨", "확인", "추가", "현재 위치"]                                             # api를 호출해야하는 명령 목록
 similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드"]
