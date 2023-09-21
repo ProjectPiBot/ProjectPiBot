@@ -1,7 +1,7 @@
 import requests
 import json
 
-GOOGLE_API_KEY = ""
+GOOGLE_API_KEY = "AIzaSyCd7MQ8WuJLWG0GAsJIn6goAtZkRIdndOw"
 
 def get_geo():
 
@@ -11,8 +11,9 @@ def get_geo():
     }
 
     result = requests.post(url, data) # 해당 API에 요청을 보내며 데이터를 추출한다.
+    # print(result)
 
-    #print(result.text)
+    # print(result.text)
     result2 = json.loads(result.text)
 
     lat = result2["location"]["lat"] # 현재 위치의 위도 추출
@@ -22,9 +23,6 @@ def get_geo():
     response = f"현재 위치는 위도 {lat}이고 경도 {lng}입니다."
     
     return response
-
-#print(get_geo())
-
 
 
 def get_lat():

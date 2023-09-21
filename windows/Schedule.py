@@ -1,0 +1,22 @@
+import pymysql
+
+def schedule_insert(date, content):
+    con = pymysql.connect(host='localhost', user='root', password='1234', db='pdb', charset='utf8') 
+    cur = con.cursor()                                                                          
+    sql = "insert into schedule values ('" + date + "','" + content + "')"
+    cur.execute(sql)
+    con.commit()
+    con.close()
+
+def schedule_select(date):
+    con = pymysql.connect(host='localhost', user='root', password='1234',
+                        db='pdb', charset='utf8')
+    cur = con.cursor()
+    sql = "select * from schedule where date='" + date +"'"
+    cur.execute(sql)
+    
+    # 데이타 Fetch
+    rows = cur.fetchall()
+    print(rows)
+    con.close()
+    return str(rows)
