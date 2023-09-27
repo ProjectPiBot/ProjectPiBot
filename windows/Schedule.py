@@ -20,3 +20,19 @@ def schedule_select(date):
     print(rows)
     con.close()
     return str(rows)
+
+def schedule_update(date, content):
+    con = pymysql.connect(host='localhost', user='root', password='1234', db='pdb', charset='utf8') 
+    cur = con.cursor()                                                                          
+    sql = "update schedule set (da)('" + date + "','" + content + "')"
+    cur.execute(sql)
+    con.commit()
+    con.close()
+
+def schedule_delete(date):
+    con = pymysql.connect(host='localhost', user='root', password='1234', db='pdb', charset='utf8') 
+    cur = con.cursor()                                                                          
+    sql = "delete from schedule where date=" + date
+    cur.execute(sql)
+    con.commit()
+    con.close()
