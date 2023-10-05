@@ -13,7 +13,6 @@ date_index = ["오늘", "내일", "모레"]
 
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
 
-
 flag : bool = False
 chatbot = AR.ChatApp()                                # 챗봇 연결
 stt = STT.SpeechToText()                              # 음성 인식 클래스 생성                
@@ -22,7 +21,6 @@ while True:
 
     data = stt.listen_and_recognize()                       # 음성을 텍스트로 변환함
     context = ""                                            # 챗봇에 전달할 정보
-    print("이도연얼굴")
 
     if not("멈춰" in data or "그만" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
         if data != "fail":
