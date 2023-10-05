@@ -6,11 +6,9 @@ import Open_Weather
 import Pi_Date as cdate
 import Schedule as sql
 
-
 commands = ["일정", "날씨", "확인", "추가", "현재 위치"]                                             # api를 호출해야하는 명령 목록
 similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드", "파이브", "파이보", "하이보"]
 date_index = ["오늘", "내일", "모레"]
-
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
 
 flag : bool = False
