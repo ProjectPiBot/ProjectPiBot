@@ -22,6 +22,7 @@ while True:
 
     data = stt.listen_and_recognize()                       # 음성을 텍스트로 변환함
     context = ""                                            # 챗봇에 전달할 정보
+    print("이도연얼굴")
 
     if not("멈춰" in data or "그만" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
         if data != "fail":
