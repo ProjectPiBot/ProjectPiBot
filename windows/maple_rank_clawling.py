@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+# 메이플스토리 리부트2 상위랭킹 크롤링
 # 크롤링할 웹 페이지 URL
 url = 'https://maplestory.nexon.com/N23Ranking/World/Total?w=1'
 
@@ -13,7 +13,6 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
     
     # 원하는 테이블을 찾음
-    # 여기서는 class가 "rank_table01"인 테이블을 예로 들겠습니다.
     table = soup.find('table', class_='rank_table')
     
     if table:
