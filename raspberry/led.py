@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import time
 
 def led_on(pin):
     GPIO.setmode(GPIO.BCM)

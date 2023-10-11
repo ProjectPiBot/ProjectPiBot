@@ -1,62 +1,28 @@
 import requests
 import json
 
-GOOGLE_API_KEY = ""
+ip_geo_api = "64cecd8e52ce409ea32fd11f78a9aadd"
+ip = ""
 
-def get_geo():
+def get_public_ip():
+    try:
+        response = requests.get('https://httpbin.org/ip')
+        return response.json()['origin']
+    except:
+        print("Error fetching public IP")
+        return None
 
-    url = f'https://www.googleapis.com/geolocation/v1/geolocate?key={GOOGLE_API_KEY}'
-    data = {
-    'considerIp': True, # 현 IP로 데이터 추출
-    }
+def get_location():
+    if ip != None:
+        url = f"https://api.ipgeolocation.io/ipgeo?apiKey={ip_geo_api}&ip={ip}"
+        try:
+            response = requests.get(url)
+            response = response.json()
+            lat = response["latitude"]
+            lng = response["longitude"]
+            return lat, lng
+        except:
+            print("Error fetching location data")
+            return None
 
-    result = requests.post(url, data) # 해당 API에 요청을 보내며 데이터를 추출한다.
-
-    #print(result.text)
-    result2 = json.loads(result.text)
-
-    lat = result2["location"]["lat"] # 현재 위치의 위도 추출
-    lng = result2["location"]["lng"] # 현재 위치의 경도 추출
-    #accuracy = result2["accuracy"]  # 위치의 정확도 추출
-    
-    response = f"현재 위치는 위도 {lat}이고 경도 {lng}입니다."
-    
-    return response
-
-#print(get_geo())
-
-
-
-def get_lat():
-
-    url = f'https://www.googleapis.com/geolocation/v1/geolocate?key={GOOGLE_API_KEY}'
-    data = {
-    'considerIp': True, # 현 IP로 데이터 추출
-    }
-
-    result = requests.post(url, data) # 해당 API에 요청을 보내며 데이터를 추출한다.
-
-    #print(result.text)
-    result2 = json.loads(result.text)
-
-    lat = result2["location"]["lat"] # 현재 위치의 위도 추출
-    
-    return lat
-
-
-
-def get_lng():
-
-    url = f'https://www.googleapis.com/geolocation/v1/geolocate?key={GOOGLE_API_KEY}'
-    data = {
-    'considerIp': True, # 현 IP로 데이터 추출
-    }
-
-    result = requests.post(url, data) # 해당 API에 요청을 보내며 데이터를 추출한다.
-
-    #print(result.text)
-    result2 = json.loads(result.text)
-
-    lng = result2["location"]["lng"] # 현재 위치의 경도 추출
-    
-    return lng
+ip = get_public_ip()

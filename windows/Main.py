@@ -1,10 +1,9 @@
-import STT
-import current_weather as cw
 import TTS
+import STT
 import AI_Response as AR
-import Open_Weather
+import Weather
 import Pi_Date as cdate
-import Schedule as sql
+import Schedule
 import maple_rank_clawling as maple
 
 commands = ["일정", "날씨", "확인", "추가", "현재 위치", "메이플", "검색"]                                             # api를 호출해야하는 명령 목록
@@ -47,14 +46,14 @@ while True:
                             TTS.speak("검색하실 캐릭터 이름을 말씀해주세요")
                             data = stt.listen_and_recognize()
                             try:
-                                check, rank, job, level = maple.get_info(data)
+                                check, rank, job, level = maple.get_character_info(data)
                                 if check:
-                                    TTS.speak(f"{data}님의 레벨은{level} 랭킹은 {rank}등이고, 직업은 {job} 입니다.")
+                                    TTS.speak(f"{data}님 {level}레벨이고, 직업은 {job} 입니다.")
                                     flag = False
                                 else:
                                     TTS.speak(f"{data} 이름을 가진 캐릭터를 찾지 못했어요. 처음부터 다시 시작해주세요.")
                             except:
-                                TTS.speak("처음부터 다시 시작해주세요.")
+                                TTS.speak("죄송합니다. 오류가 발생했습니다. 처음부터 다시 시작해주세요.")
                                 continue
 
                     if "일정" in command:                                # "일정"이 입력 되면 실행
@@ -74,7 +73,7 @@ while True:
                                 date = cdate.day_after_tomorrow
                             else:
                                 date = data
-                            rows = sql.schedule_select(date)
+                            rows = Schedule.schedule_select(date)
                             TTS.speak(str(rows))
                             flag = False
 
@@ -106,15 +105,15 @@ while True:
                                 date = date_data
                                 TTS.speak(date)
                                 
-                            sql.schedule_insert(date, content_data)               # 일정 입력
+                            Schedule.schedule_insert(date, content_data)               # 일정 입력
                             flag = False
 
                     if "날씨" in command:
                         if "현재 위치" in command:
                             print("현재 위치의 날씨 출력")
-                            context = Open_Weather.get_current_weather()
-                            r_text = str(chatbot.chat(data, context))
-                            TTS.speak(r_text)
+                            context = Weather.get_current_weather()
+                            #r_text = str(chatbot.chat(data, context))
+                            TTS.speak(context)
                             flag = False
 
                         else:
@@ -123,9 +122,9 @@ while True:
                                 if loc in data:
                                     val = loc
                             
-                            context = Open_Weather.get_weather(val)
+                            context = Weather.get_weather(val)
                             r_text = str(chatbot.chat(data, context))
-                            Open_Weather(r_text)
+                            TTS.speak(r_text)
                             flag = False
                 
                 # 명령 입력이 없이 일반 대화일 시
