@@ -12,7 +12,3 @@ def led_off(pin):
     GPIO.setup(pin, GPIO.OUT)
 
     GPIO.cleanup(pin)
-
-led_on(14)
-led_on(15)
-led_on(18)

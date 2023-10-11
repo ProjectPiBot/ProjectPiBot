@@ -5,8 +5,9 @@ import AI_Response as AR
 import Open_Weather
 import Pi_Date as cdate
 import Schedule as sql
+import maple_rank_clawling as maple
 
-commands = ["일정", "날씨", "확인", "추가", "현재 위치"]                                             # api를 호출해야하는 명령 목록
+commands = ["일정", "날씨", "확인", "추가", "현재 위치", "메이플", "검색"]                                             # api를 호출해야하는 명령 목록
 similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드", "파이브", "파이보", "하이보"]
 date_index = ["오늘", "내일", "모레"]
 location_city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기도', '강원도', '충청북도', '충청남도', '전라북도', '전라남도', '경상북도', '경상남도', '제주도']
@@ -40,10 +41,26 @@ while True:
                         print("command? : ", command)
 
                 if len(command) > 0:                                   # 특정 명령이 들어왔을 경우 명령에 맞는 명령 실행
+                    if "메이플" in command:
+                        if "검색" in command:
+                            print("메이플 캐릭터 검색 시작")
+                            TTS.speak("검색하실 캐릭터 이름을 말씀해주세요")
+                            data = stt.listen_and_recognize()
+                            try:
+                                check, rank, job, level = maple.get_info(data)
+                                if check:
+                                    TTS.speak(f"{data}님의 레벨은{level} 랭킹은 {rank}등이고, 직업은 {job} 입니다.")
+                                    flag = False
+                                else:
+                                    TTS.speak(f"{data} 이름을 가진 캐릭터를 찾지 못했어요. 처음부터 다시 시작해주세요.")
+                            except:
+                                TTS.speak("처음부터 다시 시작해주세요.")
+                                continue
+
                     if "일정" in command:                                # "일정"이 입력 되면 실행
                         if "확인" in command:
                             print("일정 확인 시작")
-                            TTS.speak("언제 일정을 확인 할까요?.")
+                            TTS.speak("언제 일정을 확인 할까요?")
                             data = stt.listen_and_recognize()
                             date = ""
                             if "오늘" in data:

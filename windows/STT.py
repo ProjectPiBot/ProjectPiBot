@@ -12,7 +12,7 @@ class SpeechToText:
 
     def listen_and_recognize(self, phrase_time_limit=3) -> str:
         with self.mic as source:
-            self.recognizer.adjust_for_ambient_noise(source, duration=phrase_time_limit)
+            self.recognizer.adjust_for_ambient_noise(source, duration=phrase_time_limit+1)
             print("say it")
             audio = self.recognizer.listen(source, phrase_time_limit=phrase_time_limit)
         try:
