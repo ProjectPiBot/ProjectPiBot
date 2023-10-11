@@ -8,5 +8,6 @@
 사용한 python 모듈  
 playsound 1.2.2  
 pyaudio  
+googletrans==4.0.0-rc1
 
 
