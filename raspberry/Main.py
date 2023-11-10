@@ -5,7 +5,7 @@ import Weather
 import Pi_Date as cdate
 import Schedule
 import maple_rank_clawling as maple
-import led
+import time
 
 commands = ["일정", "날씨", "확인", "추가", "현재 위치", "메이플", "검색"]                                             # api를 호출해야하는 명령 목록
 similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드", "파이브", "파이보", "하이보"]
@@ -16,13 +16,16 @@ flag : bool = False
 
 chatbot = AR.ChatApp()                                # 챗봇 연결
 soundCtrl = TTS.SoundController()                     # 라즈베리 TTS
-stt = STT.SpeechToText()                              # 음성 인식 클래스 생성                
+stt = STT.SpeechToText()                              # 음성 인식 클래스 생성   
+
+start_time = time.time()                              # 명령 인식 시간이 길어지면 flag를 false로 전환해 다시 부를 수 있게
+
 while True:
 
-    data = stt.listen_and_recognize()                       # 음성을 텍스트로 변환함
+    data = stt.listen_and_recognize(phrase_time_limit = 5)  # 음성을 텍스트로 변환함
     context = ""                                            # 챗봇에 전달할 정보
 
-    if not("멈춰" in data or "그만" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
+    if not("멈춰" in data or "그만" in data or "종료" in data):                # "그만" 또는 "멈춰" 라는 단어가 말에 없을 경우 실행
         if data != "fail":
             if not flag:
             
@@ -134,6 +137,8 @@ while True:
                     print("일반 대화 출력")
                     r_text = str(chatbot.chat(data, context))
                     soundCtrl.ttsKR(r_text)
+
+
 
     # 그만 또는 멈춰라고 말할 시 프로그램 종료
     else:                                                     
