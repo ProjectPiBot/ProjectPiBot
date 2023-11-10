@@ -7,7 +7,7 @@
 
 사용한 python 모듈
 
-googletrans 4.0.0-rc1  
+googletrans 4.0.0-rc1    
 pymysql  
 speech recognition  
 gTTS  
@@ -15,5 +15,7 @@ glob
 pydub  
 io  
 openai  
+requests  
+json
 
 
