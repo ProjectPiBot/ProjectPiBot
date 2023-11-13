@@ -2,7 +2,7 @@
 
 # [프로젝트 설명]
 
-https://github.com/ProjectPiBot/ProjectPiBot/assets/46129253/ec3e6868-4cfa-45be-8249-924ab292f31e
+![Untitled](https://github.com/ProjectPiBot/ProjectPiBot/assets/46129253/ec3e6868-4cfa-45be-8249-924ab292f31e)
 
 라즈베리파이와 OpenAI를 이용한 간단한 AI 스피커 제작 팀 프로젝트입니다. 
 사용자의 IP를 기반으로 한 위치의 날씨나, 특정 지명의 날씨 및 일정 관리와  
