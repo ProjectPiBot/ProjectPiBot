@@ -13,7 +13,7 @@ class SoundController:
     def ttsKR(self, word):
         # gTTS로 글자 받아오기
         tts = gTTS(text=word, lang="ko", tld="co.kr", slow="False")
-        # 파일포인터 지정, 바이트 정보로 encoding
+        # 바이트 버퍼 생성
         self.fp = BytesIO()
         tts.write_to_fp(self.fp)
         # 시작 바이트로 이동
@@ -24,6 +24,7 @@ class SoundController:
         led.led_on(14)
         play(self.say)
         led.led_off(14)
+
         # ffcache 파일이 생성돼서 glob wild card로 전부 삭제
         self.fileList = glob("./ffcache*")
         for self.filePath in self.fileList:
