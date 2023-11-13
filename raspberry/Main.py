@@ -105,7 +105,7 @@ def weathercurrent():
 
 def weatherloc(val):
     context = Weather.get_weather(val)
-    r_text = str(chatbot.chat(data, context))
+    # r_text = str(chatbot.chat(data, context))
     soundCtrl.ttsKR(r_text)
 
 # 대화 이외의 명령 목록
