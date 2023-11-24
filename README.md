@@ -33,5 +33,12 @@
 
 # [프로젝트 시연 영상] <br/>
 
-https://github.com/ProjectPiBot/ProjectPiBot/issues/2#issue-2009092768
+일정관리<br/>
+[![Video Label](http://img.youtube.com/vi/clHsXWYNcIM/0.jpg)](https://youtu.be/clHsXWYNcIM)<br/>
+날씨<br/>
+[![Video Label](http://img.youtube.com/vi/hNzkeNdC4nU/0.jpg)](https://youtu.be/hNzkeNdC4nU)<br/>
+게임 캐릭터 검색<br/>
+[![Video Label](http://img.youtube.com/vi/1-qMcwjo3RU/0.jpg)](https://youtu.be/1-qMcwjo3RU)<br/>
+일반 대화(잡담)<br/>
+[![Video Label](http://img.youtube.com/vi/adp9LAJm8Gk/0.jpg)](https://youtu.be/adp9LAJm8Gk)<br/>
 
