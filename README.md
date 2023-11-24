@@ -10,13 +10,13 @@
 
 # [프로젝트 시연 영상] 
 
-일정관리<br/>
+<b>일정관리<br/>
 [![Video Label](http://img.youtube.com/vi/clHsXWYNcIM/0.jpg)](https://youtu.be/clHsXWYNcIM)<br/><br/>
 날씨<br/>
 [![Video Label](http://img.youtube.com/vi/hNzkeNdC4nU/0.jpg)](https://youtu.be/hNzkeNdC4nU)<br/><br/>
 게임 캐릭터 검색<br/>
 [![Video Label](http://img.youtube.com/vi/1-qMcwjo3RU/0.jpg)](https://youtu.be/1-qMcwjo3RU)<br/><br/>
-일반 대화(잡담)<br/>
+일반 대화(잡담)<br/><b/>
 [![Video Label](http://img.youtube.com/vi/adp9LAJm8Gk/0.jpg)](https://youtu.be/adp9LAJm8Gk)<br/><br/>
 
 
