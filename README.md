@@ -31,3 +31,7 @@
   * 불러온 데이터를 json 형태로 받아와 활용
 
 
+# [프로젝트 시연 영상] <br/>
+
+https://github.com/ProjectPiBot/ProjectPiBot/issues/2#issue-2009092768
+
