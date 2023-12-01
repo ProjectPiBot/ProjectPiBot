@@ -3,7 +3,6 @@ import geo2
 import json
 import translate
 
-
 lat, lng = geo2.get_location()
 apikey = "2fed883ca7370c1a6f343cf63f0e25e3"
 lang = "kr"

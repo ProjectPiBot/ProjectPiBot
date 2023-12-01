@@ -1,9 +1,9 @@
-import Rasp_TTS as TTS
-import STT
-import AI_Response as AR
-import Weather
-import Pi_Date as cdate
-import Schedule
+import rasp_tts as TTS
+import stt as STT
+import ai_response as AR
+import weather as Weather
+import pi_date as cdate
+import schedule as Schedule
 import maple_rank_crawling as maple
 import time
 
@@ -103,10 +103,10 @@ def weathercurrent():
     #r_text = str(chatbot.chat(data, context))
     soundCtrl.ttsKR(context)
 
-def weatherloc(val):
+def weatherlocation(val):
     context = Weather.get_weather(val)
-    r_text = str(chatbot.chat(data, context))
-    soundCtrl.ttsKR(r_text)
+    # r_text = str(chatbot.chat(data, context))
+    soundCtrl.ttsKR(context)
 
 # 대화 이외의 명령 목록
 commands = ["일정", "날씨", "확인", "추가", "현재 위치", "메이플", "검색"]
@@ -116,7 +116,7 @@ cmd_function = {"mapleserch" : mapleserch,
                 "schedulecheck" : schedulecheck, 
                 "scheduleadd" : scheduleadd, 
                 "weathercurrent" : weathercurrent, 
-                "weatherloc" : weatherloc}
+                "weatherlocation" : weatherlocation}
 
 # "파이봇" 과 유사한 음성
 similar = ["하이본", "파이봇", "사이봇", "타이머", "하이 굿", "하이보드", "파이브", "파이보", "하이보"]
