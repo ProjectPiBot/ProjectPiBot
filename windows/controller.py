@@ -27,7 +27,7 @@ class Manage:
             if check:
                 tts.speak(f"{data}님 {level}레벨이고, 직업은 {job} 입니다.")
             else:
-                tts.speak(f"{data} 이름을 가진 캐릭터를 찾지 못했어요. 처음부터 다시 시작해주세요.")
+                tts.speak(f"{data} 이름을 가진 캐릭터를 찾지 못했습니다. 처음부터 다시 시작해주세요.")
         except:
             tts.speak("죄송합니다. 오류가 발생했습니다. 처음부터 다시 시작해주세요.")
 
